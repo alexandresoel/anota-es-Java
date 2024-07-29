@@ -22,6 +22,8 @@ Private | Sim | Não | Não | Não | Não
 
 ## Interfaces Funcionais
 
+* Uma interface funcional em Java é uma interface que contém apenas um método abstrato. Isso significa que ela define um único comportamento que pode ser implementado por classes ou expressões lambda.
+
 Assinatura | Nome
 ---------- | ----
 nada -> T  | Supplier
@@ -91,6 +93,110 @@ T->Boolean | Predicate
 * Classe<TIPO>
 * É uma clase de tipo não especificado
 * O tipo só é especificado na hora de criar o objeto
+
+
+# JDBC
+* cria a conexao -> Connection conexao = DriverManager.getConnection(stringDeConexao, usuarioDeConexao, senhaDeConexao);
+* cria o statement ->  Statement stmt = conexao.createStatement();
+* Com o statment é que roda as querys no java -> stmt.execute("QUERY");
+* PreparedStatement -> prepara a query para ser executada posteriormente evitando assim sql injection PreparedStatement stmt = conexao.prepareStatement(sql);	stmt.setString(parametro, valor);
+* Properties -> Externaliza os campos de conexão do bd.
+
+# JPA
+* Data Mapper -> Um mapeamento da classe onde indentifica onde sera persistido cada informação
+* Active Record -> Padrão onde uma classe tem diversas funcionalidades, funções que ajudam a criar suas consulta e as outras classes herdam delas
+* A classe representa a tabela e a instancia representa uma linha do banco de dados
+* ORM -> Mapeamento Objeto Relacional
+
+
+# Padrão DAO
+* 
+
+~~~ 
+public class FabricaConexao {
+	
+	public static Connection getConexao() {
+		try {
+			Properties prop = getProperties();
+			final String stringDeConexao = prop.getProperty("banco.url");
+			final String usuarioDeConexao = prop.getProperty("banco.usuario");
+			final String senhaDeConexao = prop.getProperty("banco.senha");
+			
+			return DriverManager
+					.getConnection(stringDeConexao, usuarioDeConexao, senhaDeConexao);
+		} catch (SQLException |IOException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
+	
+	private static Properties getProperties() throws IOException {
+		Properties prop = new Properties();
+		String caminho = "/conexao.properties";
+		prop.load(FabricaConexao.class.getResourceAsStream(caminho));
+		return prop;
+	}
+
+}
+
+~~~		
+
+
+# Spring 
+
+* @SpringBootApplication: Usada na classe principal da nossa aplicação para habilitar funcionalidades do Spring Boot como auto-configuração e varredura de componentes. Esta anotação é uma combinação de:
+  - @EnableAutoConfiguration: Habilita o mecanismo de auto-configuração do Spring Boot.
+  - @ComponentScan: Habilita a varredura de componentes.
+  - @Configuration: Permite a configuração baseada em Java.
+
+* @Component: Aplicada a nível de classe, esta anotação marca a classe como um bean gerenciado pelo Spring, eliminando a necessidade de código explícito para varredura de beans.
+
+* @Service: Indica que uma classe contém a lógica de negócios da aplicação, designando-a como parte da camada de serviço.
+
+* @Repository: Usada com classes que lidam com operações de acesso a dados, como operações CRUD no banco de dados.
+
+* @Controller: Marca uma classe como um controlador web, lidando com solicitações de usuários e retornando respostas apropriadas. Essencial para construir serviços web RESTful.
+
+* @RequestMapping: Usada com @Controller para mapear solicitações HTTP para métodos manipuladores, aplicável tanto a nível de classe quanto de método.
+
+* @Autowired: Injeta automaticamente dependências gerenciadas pelo Spring, simplificando a inicialização de objetos.
+
+* @Qualifier: Resolve ambiguidades na injeção de dependências especificando o bean exato a ser injetado quando existem múltiplos beans do mesmo tipo.
+
+* @Bean: Aplicada a nível de método para indicar que o método retorna um bean a ser gerenciado pelo contexto do Spring, frequentemente usada em classes de configuração.
+
+* @Configuration: Aplicada a classes que declaram múltiplos métodos @Bean, indicando que a classe contém definições de beans do Spring.
+
+
+# Diferença entre as versões de Java
+## Java 8:
+* Lambda Expressions: Introdução de expressões lambda para funcionalidade anônima.
+* Stream API: Processamento de coleções de maneira funcional.
+* Default Methods: Métodos padrão em interfaces.
+* New Date and Time API: API de data e hora mais moderna e intuitiva.
+
+## Java 11:
+* Local-Variable Syntax for Lambda Parameters: Uso da palavra-chave var em expressões lambda.
+* HTTP Client API: Nova API para enviar requisições HTTP.
+* Deprecation and Removal of APIs: Remoção de APIs obsoletas, como o Java EE e CORBA.
+
+## Java 14:
+* Switch Expressions: Novo formato para instruções switch, permitindo retornar valores.
+* Text Blocks: Blocos de texto que facilitam a manipulação de strings multilinha.
+* Helpful NullPointerExceptions: Mensagens de erro mais claras para NullPointerExceptions.
+
+## Java 17:
+* Sealed Classes: Controle mais refinado sobre a hierarquia de classes.
+* Pattern Matching for instanceof: Simplificação do uso de instanceof com atribuição de variáveis.
+* Enhanced Pseudorandom Number Generators: Melhorias nos geradores de números aleatórios.
+
+## Java 21:
+* Record Patterns: Padrões de registro para decompor registros no switch e outras construções.
+* Virtual Threads: Introdução de threads virtuais para melhorar a escalabilidade das aplicações.
+* Sequenced Collections: Nova interface para coleções sequenciadas que unifica listas e conjuntos.
+
+
+
 
 
 # O que utilizar?
