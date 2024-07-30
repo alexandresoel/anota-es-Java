@@ -7,16 +7,25 @@ Private | Sim | Não | Não | Não | Não
 
 
 # GIT
-* git init -> inicia os repositórios vazios
-* git add . -> adiciona todos os arquivos no repositório
-* git commit -m "Mensagem" -> cria um novo commit
-* git log --pretty=oneline -> verifica os commites que foram realizados 
-* git restore --staged <ARQUIV)> -> remove os arquivos da staged area
-* tags -> etiquetas para fazer marcações de versões do sistema Ex: V 1.0, V1.2
-* git tag -> lista as versões dos sistemas
-* git tag -a -m "Mensagem" -> cria uma nova tag
-
-
+## Comandos
+Comando | Descrição
+--------- | ---------
+git init | inicia os repositórios vazios
+git add . | adiciona todos os arquivos no repositório
+mkdir nome | cria uma pasta
+git commit -m "Mensagem" | cria um novo commit
+git push -u origin main | Comando responsável por enviar as alterações para o repositório remoto
+git log --pretty=oneline | verifica os commites que foram realizados 
+git restore --staged <ARQUIVO> | remove os arquivos da staged area
+tags | etiquetas para fazer marcações de versões do sistema Ex: V 1.0, V1.2
+git tag | lista as versões dos sistemas
+git tag -a -m "Mensagem" | cria uma nova tag
+git clone localDaOrigem novoNomeDaPasta | Clona um projeto com git
+rm -rf .git | remove a força o diretório git do repositório
+git commit --amend -m "mensagem" | Altera a mensagem do ultimo commit
+git reset --mixed <hash> | desfaz o ultimo commit, padrão
+git reset --soft <hash> | desfaz o ultimo commit
+git reset --hard <hash> | desfaz o ultimo commit, ignorando os arquivos e excluindo eles
 
 # STREAMS
 
